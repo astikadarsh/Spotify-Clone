@@ -63,6 +63,8 @@ body {
 
 .right {
     margin: 16px 0;
+    position: relative;
+    
 }
 
 .header {
@@ -79,6 +81,14 @@ body {
     padding: 16px;
 }
 
+
+.playbar{
+    position: absolute;
+    bottom: 0;
+    background-color: green;
+    width: 100%;
+    padding: 12px;
+}
 
 .cardContainer {
     margin: 30px;
@@ -146,4 +156,9 @@ body {
 .loginbtn:hover{
     font-weight: bold;
     font-size: 17px;
+}
+.songbuttons{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
