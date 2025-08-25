@@ -18,8 +18,12 @@ async function getSongs() {
 
 async function main() {
 
+
+
+    let currentSong;
+
+
     let songs = await getSongs()
-    console.log(songs)
 
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
     for (const song of songs) {
@@ -38,12 +42,14 @@ async function main() {
         </li>`;
     }
 
-    var audio = new Audio(songs[0]);
-    audio.play();
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
+        console.log(e.target.getElementsByTagName("div")[0])
+        
+    })
 
-    audio.addEventListener("loadeddata", () => {
-        console.log(audio.duration, audio.currentSrc, audio.currentTime)
-    });
+
+
+
 }
 
 main()

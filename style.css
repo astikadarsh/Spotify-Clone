@@ -85,9 +85,12 @@ body {
 .playbar {
     position: fixed;
     bottom: 30px;
-    background-color: rgb(241, 246, 241);
+    height: 40px;
     width: 70vw;
     padding: 12px;
+    filter: invert(1);
+    background: #dad5d5;
+    border-radius: 10px;
 }
 
 .cardContainer {
@@ -166,7 +169,7 @@ body {
 }
 
 
-.songList{
+.songList {
     height: 544px;
     overflow: auto;
     margin-bottom: 44px;
@@ -201,7 +204,29 @@ body {
     padding: 12px;
 }
 
-.songList .info{
+.songList .info {
     font-size: 13px;
     width: 344px;
+}
+
+.seekbar {
+    height: 2px;
+    width: 98%;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    margin: 6px;
+
+}
+
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: black;
+    position: relative;
+    bottom: 5px;
+    left: 0%;
+    transition: left 0.5s;
 }
