@@ -1,3 +1,24 @@
+let currentSong = new Audio();
+
+
+
+function formatTime(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let secs = Math.floor(seconds % 60);
+
+
+    if (minutes < 10) minutes = "0" + minutes;
+    if (secs < 10) secs = "0" + secs;
+
+    return `${minutes}:${secs}`;
+}
+
+
+console.log(formatTime(12));
+console.log(formatTime(75));
+console.log(formatTime(360));
+
+
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:3000/songs/")
     let response = await a.text();
@@ -16,11 +37,22 @@ async function getSongs() {
 }
 
 
+
+
+const playMusic = (track) => {
+    currentSong.src = "/songs/" + track
+    currentSong.play()
+    play.src = "pause.svg"
+    document.querySelector(".songinfo").innerHTML = track
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+}
+
+
+
 async function main() {
 
 
 
-    let currentSong;
 
 
     let songs = await getSongs()
@@ -41,14 +73,39 @@ async function main() {
         
         </li>`;
     }
+    //attach an event listener to each song
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
+        e.addEventListener("click", element => {
 
-    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
-        console.log(e.target.getElementsByTagName("div")[0])
-        
+            console.log(e.querySelector(".info").firstElementChild.innerHTML)
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+        })
+
+
+    })
+
+
+    //attach an event listener to play, next and previous
+    play.addEventListener("click", () => {
+        if (currentSong.paused) {
+            currentSong.play()
+            play.src = "pause.svg"
+        }
+        else {
+            currentSong.pause()
+            play.src = "play.svg"
+        }
     })
 
 
 
+
+    //listen for timeupadte event
+
+    currentSong.addEventListener("timeupdate", () => {
+        console.log(currentSong.currrentTime, currentSong.duration);
+        document.querySelector(".songtime").innerHTML=`${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`
+    })
 
 }
 
