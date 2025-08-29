@@ -85,7 +85,7 @@ body {
 .playbar {
     position: fixed;
     bottom: 30px;
-    height: 40px;
+    min-height: 40px;
     width: 70vw;
     padding: 12px;
     filter: invert(1);
@@ -99,7 +99,7 @@ body {
     gap: 10px;
     flex-wrap: wrap;
 
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 70vh;
 }
 
@@ -192,6 +192,18 @@ body {
     justify-content: space-between;
 }
 
+
+.hamburger {
+    display: none;
+}
+
+.hamburgerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
 .playnow {
     display: flex;
     align-items: center;
@@ -210,13 +222,14 @@ body {
 }
 
 .seekbar {
-    height: 2px;
-    width: 98%;
+    height: 4px;
+    width: calc(100vw - 70px);
     background: black;
     position: absolute;
     bottom: 0;
     border-radius: 10px;
     margin: 6px;
+    cursor: pointer;
 
 }
 
@@ -231,16 +244,50 @@ body {
     transition: left 0.5s;
 }
 
-.songbuttons img{
+.songbuttons img {
     cursor: pointer;
 }
 
-.abovebar{
+.abovebar {
     display: flex;
     justify-content: space-between;
+    margin: 20px 0;
 }
 
-.songinfo, .songtime{
+.songinfo,
+.songtime {
     color: black;
     padding: 0 12px;
+}
+
+@media (max-width: 1400px) {
+    .left {
+
+        position: absolute;
+        left: -120%;
+        transition: all .3s;
+        z-index: 1;
+        width: 373px;
+        background-color: black;
+    }
+
+    .left .close{
+        position: absolute;
+        right: 31px;
+        top: 25px;
+        width: 29px;
+    }
+
+
+    .right {
+        width: 100vw;
+    }
+
+    .playbar {
+        width: calc(100vw - 60px);
+    }
+
+    .hamburger {
+        display: block;
+    }
 }
