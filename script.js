@@ -1,5 +1,5 @@
 let currentSong = new Audio();
-
+let songs;
 
 
 function formatTime(seconds) {
@@ -39,10 +39,10 @@ async function getSongs() {
 
 
 
-const playMusic = (track,pause=false) => {
+const playMusic = (track, pause = false) => {
     currentSong.src = "/songs/" + track
     if (!pause) {
-        
+
         currentSong.play()
         play.src = "pause.svg"
     }
@@ -58,7 +58,7 @@ async function main() {
 
 
 
-    let songs = await getSongs()
+    songs = await getSongs()
     playMusic(songs[0], true)
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
     for (const song of songs) {
@@ -107,25 +107,48 @@ async function main() {
 
     currentSong.addEventListener("timeupdate", () => {
         console.log(currentSong.currrentTime, currentSong.duration);
-        document.querySelector(".songtime").innerHTML=`${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`
-        document.querySelector(".circle").style.left= (currentSong.currentTime/ currentSong.duration)*100 + "%";
+        document.querySelector(".songtime").innerHTML = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`
+        document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
     })
 
     //add an event listener to seekbar
 
-    document.querySelector(".seekbar").addEventListener("click",e=>{
-        let percent=(e.offsetX/e.target.getBoundingClientRect().width)*100
-        document.querySelector(".circle").style.left=percent + "%";
-        currentSong.currentTime= (currentSong.duration*percent)/100
+    document.querySelector(".seekbar").addEventListener("click", e => {
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100
+        document.querySelector(".circle").style.left = percent + "%";
+        currentSong.currentTime = (currentSong.duration * percent) / 100
     })
     // add event listener for hamburger
-    document.querySelector(".hamburger").addEventListener("click",()=>{
-        document.querySelector(".left").style.left="0"
+    document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".left").style.left = "0"
     })
 
     // add event listener for close button
-    document.querySelector(".close").addEventListener("click",()=>{
-        document.querySelector(".left").style.left="-120%"
+    document.querySelector(".close").addEventListener("click", () => {
+        document.querySelector(".left").style.left = "-120%"
+    })
+
+    //add an event listener to previous and next
+
+    previous.addEventListener("click", () => {
+        currentSong.pause()
+        console.log("previous clicked")
+        console.log(currentSong)
+        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+        if ((index - 1) >= 0) {
+
+            playMusic(songs[index - 1])
+        }
+    })
+    next.addEventListener("click", () => {
+        currentSong.pause()
+        console.log("next clicked")
+        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+        if ((index + 1) < songs.length) {
+
+            playMusic(songs[index + 1])
+        }
+
     })
 }
 
