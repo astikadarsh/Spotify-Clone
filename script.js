@@ -150,6 +150,12 @@ async function main() {
         }
 
     })
+
+    //add a event to volume
+    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
+        console.log("setting volume to", e.target.value,"/100")
+        currentSong.volume=parseInt(e.target.value)/100
+    })
 }
 
 main()
