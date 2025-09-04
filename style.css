@@ -1,3 +1,7 @@
+:root {
+    --a: 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -110,7 +114,8 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     overflow-y: auto;
-    max-height: 70vh;
+    max-height: 60vh;
+
 }
 
 .card {
@@ -119,6 +124,7 @@ body {
     border-radius: 5px;
     background-color: #252525;
     position: relative;
+    transition: all 0.9s;
 }
 
 .card>* {
@@ -130,11 +136,18 @@ body {
     object-fit: contain;
 }
 
+.card:hover {
+    background-color: rgb(105, 103, 103);
+    cursor: pointer;
+    --a: 1;
+}
+
+
 .play {
     position: absolute;
     top: 158px;
     right: 12px;
-    opacity: 0;
+    opacity: var(--a);
     transition: all 1s ease-out;
 }
 
@@ -289,11 +302,16 @@ body {
     padding: 0 12px;
 }
 
-.volume{
+.volume {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
+    cursor: pointer;
+}
+
+.range input {
+    cursor: pointer;
 }
 
 
@@ -326,7 +344,7 @@ body {
         width: 29px;
     }
 
-    .timevol{
+    .timevol {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -361,6 +379,7 @@ body {
     .cardContainer {
         margin: 0;
         justify-content: center;
+        
     }
 
     .close {
@@ -376,7 +395,7 @@ body {
 }
 
 @media(max-width:400px) {
-    .card{
+    .card {
         width: 84vw;
     }
 }
