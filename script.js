@@ -33,6 +33,12 @@ async function getSongs(folder) {
             songs.push(element.href.split(`/${folder}/`)[1])
         }
     }
+    
+
+
+
+
+
 
     //show all the songs in the playlist
 
@@ -63,6 +69,8 @@ async function getSongs(folder) {
 
 
     })
+
+    return songs
 
 }
 
@@ -130,7 +138,7 @@ async function displayAlbums() {
             console.log(item, item.currentTarget.dataset)
 
             songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
-
+            playMusic(songs[0])
         })
     })
 
@@ -216,6 +224,9 @@ async function main() {
     document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
         console.log("setting volume to", e.target.value, "/100")
         currentSong.volume = parseInt(e.target.value) / 100
+        if (currentSong.volume >0) {
+            document.querySelector(".volume>img").src= document.querySelector(".volume>img").src.replace("mute.svg","volume.svg")
+        }
     })
 
 
